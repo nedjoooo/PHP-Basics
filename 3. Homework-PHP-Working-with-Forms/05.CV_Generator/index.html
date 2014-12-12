@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CV Generator</title>
+
+</head>
+<body>
+<form method="post" action="CVGenerator.php">
+    <fieldset>
+        <legend>Personal Information</legend>
+        <input type="text" name="firstName" placeholder="First Name" required="required"><br>
+        <input type="text" name="lastName" placeholder="Last Name" required="required"><br>
+        <input type="email" name="email" placeholder="Email" required="required"><br>
+        <input type="text" name="phone" placeholder="Phone Number" required="required"><br>
+        <label for="female">Female</label>
+        <input type="radio" name="gender" value="Female" id="female">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" value="Male" id="male" required="required"><br>
+        <label for="birthday">Birth Date</label><br>
+        <input type="date" name="birthday" id="birthday"><br>
+        <label>Nationality</label><br>
+        <select name="nationality" required="required">
+            <option value="Bulgarian" selected="selected">Bulgarian</option>
+            <option value="English">English</option>
+            <option value="German">German</option>
+            <option value="Italian">Italian</option>
+            <option value="France">France</option>
+            <option value="Spain">Spain</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <legend>Last Work Position</legend>
+        <label for="companyName">Company Name</label>
+        <input type="text" name="lastCompanyName" id="companyName"><br>
+        <label for="startDate">From</label>
+        <input type="date" name="startDate" id="startDate"><br>
+        <label for="endDate">To</label>
+        <input type="date" name="endDate" id="endDate">
+    </fieldset>
+    <fieldset id="computerSkills">
+        <legend>Computer Skills</legend>
+        <label for="progLang">Programming Languages</label><br>
+        <div id="progLang">
+            <input type="text" name="programmingLanguages[]">
+            <select name="programmingLevel[]">
+                <option value="beginner">Beginner</option>
+                <option value="programming">Programming</option>
+                <option value="ninja">Ninja</option>
+            </select>
+        </div>
+        <input type="button" value="Remove Language" id="removeProgrammingLanguage" onclick="RemoveProgrammingLanguage()">
+        <input type="button" value="Add Language" onclick="AddProgrammingLanguage()">
+    </fieldset>
+    <fieldset id="otherSkills">
+        <legend>Other Skills</legend>
+        <label for="lang">Languages</label><br>
+        <div id="lang">
+            <input type="text" name="languages[]">
+            <select name="comprehension[]">
+                <option disabled="disabled" selected="selected">-Comprehension-</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <select name="reading[]">
+                <option disabled="disabled" selected="selected">-Reading-</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <select name="writing[]">
+                <option disabled="disabled" selected="selected">-Writing-</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+        </div>
+        <input type="button" value="Remove Language" id="removeLanguage" onclick="RemoveLanguage()">
+        <input type="button" value="Add Language" onclick="AddLanguage()"><br>
+        <span>Driver's License</span><br>
+        <label for="b">B</label>
+        <input type="checkbox" name="b" id="b" value="B">
+        <label for="a">A</label>
+        <input type="checkbox" name="a" id="a" value="A">
+        <label for="b">C</label>
+        <input type="checkbox" name="c" id="c" value="C">
+    </fieldset>
+    <input type="submit" value="Generate CV">
+</form>
+
+<script>
+    function AddProgrammingLanguage() {
+        var element=document.createElement("div");
+        element.setAttribute('id', 'progLang');
+        element.innerHTML= "<input type=\"text\" name=\"programmingLanguages[]\">" +
+                            "&nbsp;<select name=\"programmingLevel[]\">" +
+                                "<option value=\"beginner\">Beginner</option>" +
+                                "<option value=\"programming\">Programming</option>" +
+                                "<option value=\"ninja\">Ninja</option>" +
+                            "</select>";
+        var parent=document.getElementById("computerSkills");
+        var before=document.getElementById("removeProgrammingLanguage");
+        parent.insertBefore(element, before);
+    }
+    function RemoveProgrammingLanguage() {
+        var parent=document.getElementById("computerSkills");
+        var child=parent.getElementsByTagName("div");
+        if(child.length>0) {
+            parent.removeChild(child[child.length-1]);
+        }
+    }
+
+    function AddLanguage() {
+        var element=document.createElement("div");
+        element.setAttribute('id', 'lang');
+        element.innerHTML= "<input type=\"text\" name=\"languages[]\" id=\"languages\">" +
+                            "&nbsp;<select name=\"comprehension[]\">" +
+                            "<option disabled=\"disabled\" selected=\"selected\">-Comprehension-</option>" +
+                            "<option value=\"beginner\">Beginner</option>" +
+                            "<option value=\"intermediate\">Intermediate</option>" +
+                            "<option value=\"advanced\">Advanced</option>" +
+                            "</select>" +
+                            "&nbsp;<select name=\"reading[]\">" +
+                            "<option disabled=\"disabled\" selected=\"selected\">-Reading-</option>" +
+                            "<option value=\"beginner\">Beginner</option>"+
+                            "<option value=\"intermediate\">Intermediate</option>"+
+                            "<option value=\"advanced\">Advanced</option>"+
+                            "</select>"+
+                            "&nbsp;<select name=\"writing[]\">"+
+                            "<option disabled=\"disabled\" selected=\"selected\">-Writing-</option>"+
+                            "<option value=\"beginner\">Beginner</option>"+
+                            "<option value=\"intermediate\">Intermediate</option>"+
+                            "<option value=\"advanced\">Advanced</option>"+
+                            "</select>";
+        var parent=document.getElementById("otherSkills");
+        var before=document.getElementById("removeLanguage");
+        parent.insertBefore(element, before);
+    }
+
+    function RemoveLanguage() {
+        var parent=document.getElementById("otherSkills");
+        var child=parent.getElementsByTagName("div");
+        if(child.length>0) {
+            parent.removeChild(child[child.length-1]);
+        }
+    }
+</script>
+</body>
+</html>
